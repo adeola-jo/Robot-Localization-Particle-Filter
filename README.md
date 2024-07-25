@@ -1,2 +1,99 @@
-# Robot-Localization-Particle-Filter
-An implementation of particle filter algorithm for robot localization
+# Particle Filter Algorithm for Robot Localization
+
+This repository contains the implementation of the Particle Filter algorithm used to localize a two-dimensional robot (Turtlebot) in a given map. This work is part of the lab assignments for the Probabilistic Robotics course at the Universitat de Girona, under the Computer Vision and Robotics Research Institute (VICOROB).
+
+## Objective
+
+The aim of this lab is to implement the particle filter algorithm to localize a robot by representing the posterior belief \( \text{bel}(x_t) \) using a set of random particle samples drawn from a Gaussian distribution.
+
+## Implementation
+
+The Particle Filter algorithm consists of three main steps: prediction, weighting (update), and resampling. These steps are recursively performed to estimate the robot's state.
+
+### 1. Prediction
+
+In the prediction step, the new state of each particle is obtained by adding the odometry reading to the previous state of the particle. This step incorporates Gaussian noise to model the uncertainty in odometry measurement.
+
+\[ \begin{pmatrix} x_k \\ y_k \\ \theta_k \end{pmatrix} = \begin{pmatrix} x_{k-1} \\ y_{k-1} \\ \theta_{k-1} \end{pmatrix} + \begin{pmatrix} \cos(\theta_{k-1}) & -\sin(\theta_{k-1}) \\ \sin(\theta_{k-1}) & \cos(\theta_{k-1}) \end{pmatrix} \begin{pmatrix} \Delta x_k + \text{noise}_x \\ \Delta y_k + \text{noise}_y \end{pmatrix} + \begin{pmatrix} 0 \\ 0 \\ \Delta \theta_k + \text{noise}_\theta \end{pmatrix} \]
+
+### 2. Weighting
+
+In the weighting step, the robot's sensor measurements are used to update the weights of each particle. The likelihood of each particle's predicted measurement is compared to the actual measurement, and the weights are adjusted accordingly.
+
+\[ w = \frac{1}{\sigma \sqrt{2\pi}} \exp\left( -\frac{(x - \mu)^2}{2\sigma^2} \right) \]
+
+where \( x \) is the measured value (range or angle), \( \mu \) is the expected value (extracted from the given map lines), and \( \sigma \) is the uncertainty of the measurement.
+
+### 3. Resampling
+
+The resampling step addresses particle degeneracy by selecting particles with higher weights more frequently, thus focusing the particle set on the most likely states.
+
+\[ N_{\text{eff}} = \frac{1}{\sum_{i=1}^N (w_i)^2} \]
+
+When \( N_{\text{eff}} \) falls below a threshold, resampling is performed using the systematic resampling algorithm. In systematic resampling, particles are selected based on their weights to form a new set of particles.
+
+## Files
+
+- `particle_filter.py`: Contains the implementation of the Particle Filter algorithm.
+- `Particle_FIlter_Moses_Joseph.pdf`: The lab report detailing the implementation and discussion of the Particle Filter algorithm.
+
+## Usage
+
+To run the Particle Filter algorithm, execute the `particle_filter.py` script. The script requires a predefined map and initial conditions for the particles.
+
+```bash
+python particle_filter.py
+```
+
+Ensure that the required dependencies are installed. You can install them using:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Results
+
+Here is a GIF showcasing the localization of the robot using the Particle Filter algorithm:
+
+![Particle Filter Result](path/to/your/gif)
+
+## Discussion
+
+One issue encountered during the implementation was particle degeneracy, where one particle took almost all the weight, making other particles' contributions insignificant. This was resolved by correctly implementing the weighting step and ensuring proper normalization of the particle weights.
+
+---
+
+**Authors:**
+- Moses Chuka Ebere (u1985468)
+- Joseph Oloruntoba Adeola (u1988552)
+
+**Instructor:**
+- Eduardo Ochoa
+
+---
+
+## References
+
+- [Probabilistic Robotics by Sebastian Thrun, Wolfram Burgard, and Dieter Fox](https://www.probabilistic-robotics.org/)
+- Lecture slides and notes from Universitat de Girona
+
+For more details, refer to the lab report `Particle_FIlter_Moses_Joseph.pdf`.
+
+---
+
+Feel free to contribute to this project by forking the repository and submitting pull requests.
+
+---
+
+### Contact
+
+For any inquiries, please contact:
+
+- Moses Chuka Ebere: moses.ebere@example.com
+- Joseph Oloruntoba Adeola: joseph.adeola@example.com
+
+---
+
+**License:**
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
