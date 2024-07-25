@@ -35,27 +35,20 @@ When \( N_{\text{eff}} \) falls below a threshold, resampling is performed using
 ## Files
 
 - `particle_filter.py`: Contains the implementation of the Particle Filter algorithm.
-- `Particle_FIlter_Moses_Joseph.pdf`: The lab report detailing the implementation and discussion of the Particle Filter algorithm.
+- `report.pdf`: The lab report detailing the implementation and discussion of the Particle Filter algorithm.
 
-## Usage
+## Disclaimer
 
-To run the Particle Filter algorithm, execute the `particle_filter.py` script. The script requires a predefined map and initial conditions for the particles.
+This code depends on certain modules developed by the University of Girona and cannot be made public without permission.
 
-```bash
-python particle_filter.py
-```
+The user cannot run the code. This repository is intended to host the results and demonstrate the implementation of the Particle Filter algorithm. Only the parts of the project developed by the authors are made public.
 
-Ensure that the required dependencies are installed. You can install them using:
-
-```bash
-pip install -r requirements.txt
-```
 
 ## Results
 
 Here is a GIF showcasing the localization of the robot using the Particle Filter algorithm:
 
-![Particle Filter Result](path/to/your/gif)
+![Particle Filter Result](result.gif)
 
 ## Discussion
 
@@ -64,11 +57,8 @@ One issue encountered during the implementation was particle degeneracy, where o
 ---
 
 **Authors:**
-- Moses Chuka Ebere (u1985468)
-- Joseph Oloruntoba Adeola (u1988552)
-
-**Instructor:**
-- Eduardo Ochoa
+- [Moses Chuka Ebere](https://github.com/MosesEbere)
+- [Joseph Oloruntoba Adeola](https://github.com/adeola-jo)
 
 ---
 
@@ -77,11 +67,8 @@ One issue encountered during the implementation was particle degeneracy, where o
 - [Probabilistic Robotics by Sebastian Thrun, Wolfram Burgard, and Dieter Fox](https://www.probabilistic-robotics.org/)
 - Lecture slides and notes from Universitat de Girona
 
-For more details, refer to the lab report `Particle_FIlter_Moses_Joseph.pdf`.
+For more details, refer to the lab report `report.pdf`.
 
----
-
-Feel free to contribute to this project by forking the repository and submitting pull requests.
 
 ---
 
